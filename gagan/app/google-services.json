@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "100779530628",
+    "firebase_url": "https://key-cistern-195108.firebaseio.com",
+    "project_id": "key-cistern-195108",
+    "storage_bucket": "key-cistern-195108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100779530628:android:0c4817a999ee6c9c",
+        "android_client_info": {
+          "package_name": "com.example.gagan.google"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100779530628-p851j8q12671ga02bq79a1ub830p93ne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gagan.google",
+            "certificate_hash": "b8bccf7c4e00927fe056ee9e1d6ae536816adc0a"
+          }
+        },
+        {
+          "client_id": "100779530628-et8pguahaa5fiem29214r7c43cvh06ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcOZcE0eXDdg31BLPxnKE0C1ldFsnQHMA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100779530628-et8pguahaa5fiem29214r7c43cvh06ok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
