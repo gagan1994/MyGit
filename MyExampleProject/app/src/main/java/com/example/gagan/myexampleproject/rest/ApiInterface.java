@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import rx.Observable;
 
 /**
  * Created by Gagan on 3/1/2018.
@@ -15,4 +16,6 @@ import retrofit2.http.GET;
 public interface ApiInterface {
     @GET(Constant.USER_URL)
     Call<List<UserClass>> getUsers();
+    @GET(Constant.USER_URL)
+    Observable<List<UserClass>> getUsersByObservable();
 }

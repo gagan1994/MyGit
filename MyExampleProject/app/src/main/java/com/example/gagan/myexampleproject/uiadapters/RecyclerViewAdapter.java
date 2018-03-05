@@ -67,6 +67,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mDataSet.size();
     }
 
+    public void addAll(List<UserClass> userClasses) {
+        int prevPos=mDataSet.size()-1;
+        this.mDataSet.addAll(userClasses);
+        notifyItemMoved(prevPos,mDataSet.size()-1);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_heading)
         TextView tv_heading;

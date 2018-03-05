@@ -1,6 +1,7 @@
 package com.example.gagan.myexampleproject.utilhelper;
 
 import com.example.gagan.myexampleproject.fragments.BasePagerFragment;
+import com.example.gagan.myexampleproject.fragments.RxJavaPaginatorFragment;
 import com.example.gagan.myexampleproject.fragments.home.HomeFragment;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Constant {
         if (fragmentList.size() != 0)
             return fragmentList;
         fragmentList.add(new HomeFragment());
+        fragmentList.add(new RxJavaPaginatorFragment());
         fragmentList.add(new BasePagerFragment());
         return fragmentList;
     }
