@@ -42,7 +42,7 @@ public class HomeFragment extends BasePagerFragment {
 
 
     private static final String TAG = "HomeFragment";
-    private HomeFragmentComponent homeFragmentComponent;
+    private BaseFragmentComponent homeFragmentComponent;
 
     @Inject
     RecyclerViewAdapter adapter;
@@ -59,13 +59,13 @@ public class HomeFragment extends BasePagerFragment {
         View view;
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-        homeFragmentComponent = DaggerHomeFragmentComponent.builder()
+        homeFragmentComponent = DaggerBaseFragmentComponent.builder()
                 .applicationComponent(MyApplication.applicationComponent())
-                .homeFragmentModule(new HomeFragmentModule(this))
+                .baseFragmentModule(new BaseFragmentModule(this))
                 .build();
 
         //  adapter = homeFragmentComponent.recyclerViewAdapter();
-        homeFragmentComponent.injectHomeFragment(this);
+        homeFragmentComponent.injectBaseFragment(this);
         rv_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_view.setAdapter(adapter);
         callApi();

@@ -10,6 +10,6 @@ import javax.inject.Scope;
  */
 @Scope
 @Retention(RetentionPolicy.CLASS)
-public @interface HomeFragmentScope {
+public @interface BaseFragmentScope {
 
 }

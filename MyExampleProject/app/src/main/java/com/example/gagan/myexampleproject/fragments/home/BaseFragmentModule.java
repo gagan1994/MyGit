@@ -2,6 +2,7 @@ package com.example.gagan.myexampleproject.fragments.home;
 
 import android.content.Context;
 
+import com.example.gagan.myexampleproject.fragments.BasePagerFragment;
 import com.example.gagan.myexampleproject.fragments.home.HomeFragment;
 import com.example.gagan.myexampleproject.uiadapters.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
@@ -15,15 +16,15 @@ import dagger.Provides;
  * Created by Gagan on 3/1/2018.
  */
 @Module
-public class HomeFragmentModule {
-    private final HomeFragment mFragment;
+public class BaseFragmentModule {
+    private final BasePagerFragment mFragment;
 
-    public HomeFragmentModule(HomeFragment fragment) {
+    public BaseFragmentModule(BasePagerFragment fragment) {
         this.mFragment = fragment;
     }
 
     @Provides
-    @HomeFragmentScope
+    @BaseFragmentScope
     public Context context(){
         return mFragment.getContext();
     }

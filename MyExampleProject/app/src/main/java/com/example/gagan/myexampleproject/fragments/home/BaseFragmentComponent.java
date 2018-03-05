@@ -10,10 +10,10 @@ import dagger.Component;
 /**
  * Created by Gagan on 3/1/2018.
  */
-@HomeFragmentScope
-@Component(modules = HomeFragmentModule.class, dependencies = ApplicationComponent.class)
-public interface HomeFragmentComponent {
-    void injectHomeFragment(HomeFragment fragment);
+@BaseFragmentScope
+@Component(modules = BaseFragmentModule.class, dependencies = ApplicationComponent.class)
+public interface BaseFragmentComponent {
+    void injectBaseFragment(HomeFragment fragment);
     /*RecyclerViewAdapter recyclerViewAdapter();
 
     Picasso getPicasso();
