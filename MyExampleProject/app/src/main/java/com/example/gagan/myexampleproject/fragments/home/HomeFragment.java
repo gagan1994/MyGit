@@ -65,7 +65,7 @@ public class HomeFragment extends BasePagerFragment {
                 .build();
 
         //  adapter = homeFragmentComponent.recyclerViewAdapter();
-        homeFragmentComponent.injectBaseFragment(this);
+        homeFragmentComponent.injectHomeFragment(this);
         rv_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_view.setAdapter(adapter);
         callApi();

@@ -1,6 +1,8 @@
 package com.example.gagan.myexampleproject.fragments.home;
 
 import com.example.gagan.myexampleproject.daggerhelpers.ApplicationComponent;
+import com.example.gagan.myexampleproject.fragments.BasePagerFragment;
+import com.example.gagan.myexampleproject.fragments.RxJavaPaginatorFragment;
 import com.example.gagan.myexampleproject.rest.ApiInterface;
 import com.example.gagan.myexampleproject.uiadapters.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
@@ -13,7 +15,11 @@ import dagger.Component;
 @BaseFragmentScope
 @Component(modules = BaseFragmentModule.class, dependencies = ApplicationComponent.class)
 public interface BaseFragmentComponent {
-    void injectBaseFragment(HomeFragment fragment);
+    void injectBaseFragment(BasePagerFragment fragment);
+
+    void injectHomeFragment(HomeFragment fragment);
+
+    void injectRxJavaPagerFragment(RxJavaPaginatorFragment fragment);
     /*RecyclerViewAdapter recyclerViewAdapter();
 
     Picasso getPicasso();

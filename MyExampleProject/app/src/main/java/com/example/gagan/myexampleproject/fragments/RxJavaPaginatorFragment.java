@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.gagan.myexampleproject.R;
 import com.example.gagan.myexampleproject.fragments.BasePagerFragment;
+import com.example.gagan.myexampleproject.fragments.home.BaseFragmentComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +24,7 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     public static final String TAG = "RxJavaPaginatorFragment";
     @BindView(R.id.rv_list)
     RecyclerView rv_list;
-
+    BaseFragmentComponent baseFragmentComponent;
     public RxJavaPaginatorFragment() {
     }
 
@@ -34,6 +35,7 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rx_java_paginator, container, false);
         ButterKnife.bind(view);
+        baseFragmentComponent.injectBaseFragment(this);
         return view;
     }
 
