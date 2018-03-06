@@ -8,6 +8,8 @@ import com.example.gagan.myexampleproject.daggerhelpers.modules.PicassoModule;
 import com.example.gagan.myexampleproject.daggerhelpers.modules.ServiceModule;
 import com.example.gagan.myexampleproject.daggerhelpers.scope.SingletonClassScope;
 import com.example.gagan.myexampleproject.rest.ApiInterface;
+import com.example.gagan.myexampleproject.rest.OpenConnectionInterface;
+ import com.example.gagan.myexampleproject.rest.WeatherInterFace;
 import com.squareup.picasso.Picasso;
 
 import dagger.Component;
@@ -22,4 +24,8 @@ public interface ApplicationComponent {
     Picasso getPicasso();
 
     ApiInterface getApiInterface();
+
+    WeatherInterFace getWeatherInterFace();
+
+    OpenConnectionInterface getOpenConnectionInterface();
 }

@@ -23,6 +23,5 @@ public interface ApiInterface {
     @GET(Constant.USER_URL)
     Observable<List<UserClass>> getUsersByObservable();
 
-    @GET(Constant.API_URL)
-    Observable<WeatherData> getWeather(@Query("q") String place,@Query("APPID")String APPID);
+
 }

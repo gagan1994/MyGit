@@ -5,12 +5,15 @@ import android.content.Context;
 import com.example.gagan.myexampleproject.daggerhelpers.scope.SingletonClassScope;
 
 import java.io.File;
+import java.io.IOException;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
@@ -22,11 +25,32 @@ public class NetworkModule {
     @Provides
     @SingletonClassScope
 
-    public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
+    public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor,
+                                     Cache cache, Interceptor interceptor) {
         return new OkHttpClient.Builder()
                 .cache(cache)
+                .addNetworkInterceptor(interceptor)
                 .addInterceptor(loggingInterceptor)
                 .build();
+    }
+
+    @Provides
+    @SingletonClassScope
+    public Interceptor interceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
+                Request.Builder requestBuilder = original.newBuilder()
+                        //  HEADER.put("connection","keep-alive");
+                        .addHeader("abc","avcas")
+                        .addHeader("connection", "keep-alive");
+
+                Request request = requestBuilder.build();
+
+                return chain.proceed(request);
+            }
+        };
     }
 
     @Provides

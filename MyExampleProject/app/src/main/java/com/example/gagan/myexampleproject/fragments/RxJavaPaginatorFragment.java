@@ -21,6 +21,7 @@ import com.example.gagan.myexampleproject.fragments.home.DaggerBaseFragmentCompo
 import com.example.gagan.myexampleproject.pojoclass.UserClass;
 import com.example.gagan.myexampleproject.pojoclass.WeatherData;
 import com.example.gagan.myexampleproject.rest.ApiInterface;
+import com.example.gagan.myexampleproject.rest.WeatherInterFace;
 import com.example.gagan.myexampleproject.uiadapters.RecyclerViewAdapter;
 import com.example.gagan.myexampleproject.utilhelper.Constant;
 import com.example.gagan.myexampleproject.utilhelper.Utils;
@@ -51,6 +52,9 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     @Inject
     Picasso picasso;
     @Inject
+    WeatherInterFace apiWeather;
+
+    @Inject
     ApiInterface apiInterface;
     @Inject
     RecyclerViewAdapter adapter;
@@ -78,15 +82,15 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
         layoutManager = new LinearLayoutManager(getContext());
         rv_list.setLayoutManager(layoutManager);
         rv_list.setAdapter(adapter);
-        /*addListners();*/
-        /*callApi();*/
+        addListners();
+        callApi();
         getWeather();
         return view;
     }
 
     private void getWeather() {
         London = "London";
-        apiInterface.getWeather(London, Constant.ApiId).subscribeOn(Schedulers.newThread())
+        apiWeather.getWeather(London, Constant.ApiId).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WeatherData>() {
                     @Override
