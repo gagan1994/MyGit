@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,11 @@ import com.example.gagan.myexampleproject.fragments.home.BaseFragmentComponent;
 import com.example.gagan.myexampleproject.fragments.home.BaseFragmentModule;
 import com.example.gagan.myexampleproject.fragments.home.DaggerBaseFragmentComponent;
 import com.example.gagan.myexampleproject.pojoclass.UserClass;
+import com.example.gagan.myexampleproject.pojoclass.WeatherData;
 import com.example.gagan.myexampleproject.rest.ApiInterface;
 import com.example.gagan.myexampleproject.uiadapters.RecyclerViewAdapter;
+import com.example.gagan.myexampleproject.utilhelper.Constant;
+import com.example.gagan.myexampleproject.utilhelper.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -54,6 +58,7 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     private boolean loading;
     private static final int VISIBLE_THRESHOLD = 3;
     private int pageNumber = 0;
+    private String London;
 
     public RxJavaPaginatorFragment() {
     }
@@ -64,7 +69,7 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rx_java_paginator, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         baseFragmentComponent = DaggerBaseFragmentComponent.builder()
                 .baseFragmentModule(new BaseFragmentModule(this))
                 .applicationComponent(MyApplication.applicationComponent())
@@ -73,9 +78,36 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
         layoutManager = new LinearLayoutManager(getContext());
         rv_list.setLayoutManager(layoutManager);
         rv_list.setAdapter(adapter);
-        addListners();
-        callApi();
+        /*addListners();*/
+        /*callApi();*/
+        getWeather();
         return view;
+    }
+
+    private void getWeather() {
+        London = "London";
+        apiInterface.getWeather(London, Constant.ApiId).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<WeatherData>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(WeatherData weatherData) {
+                        Log.e("Current Weather", weatherData.getWeather().get(0)
+                                .getDescription());
+                        Utils.Toast(getActivity(), weatherData.getWeather().get(0)
+                                .getDescription());
+                    }
+                });
+        ;
     }
 
     private void callApi() {
@@ -140,3 +172,6 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     }
 
 }
+/*
+
+* */

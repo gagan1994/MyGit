@@ -16,7 +16,12 @@ public class Constant {
     public static final String EMPTY_STRING = "Comming soon";
     final static List<BasePagerFragment> fragmentList = new ArrayList<>();
     public static final String USER_URL = "iz23x";
-    public static final String BASE_URL = "https://api.myjson.com/bins/";
+    public static final String API_URL = "weather?";
+
+    public static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+    public static String ApiId="f724c38a7179c63c0e0a2268b403dce9";
+    ///?=London
+
     public static List<BasePagerFragment> getList() {
         if (fragmentList.size() != 0)
             return fragmentList;

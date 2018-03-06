@@ -1,12 +1,15 @@
 package com.example.gagan.myexampleproject.rest;
 
 import com.example.gagan.myexampleproject.pojoclass.UserClass;
+import com.example.gagan.myexampleproject.pojoclass.Weather;
+import com.example.gagan.myexampleproject.pojoclass.WeatherData;
 import com.example.gagan.myexampleproject.utilhelper.Constant;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -16,6 +19,10 @@ import rx.Observable;
 public interface ApiInterface {
     @GET(Constant.USER_URL)
     Call<List<UserClass>> getUsers();
+
     @GET(Constant.USER_URL)
     Observable<List<UserClass>> getUsersByObservable();
+
+    @GET(Constant.API_URL)
+    Observable<WeatherData> getWeather(@Query("q") String place,@Query("APPID")String APPID);
 }

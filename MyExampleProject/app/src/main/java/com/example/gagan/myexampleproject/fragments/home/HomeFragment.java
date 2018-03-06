@@ -77,8 +77,11 @@ public class HomeFragment extends BasePagerFragment {
         call.enqueue(new Callback<List<UserClass>>() {
             @Override
             public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
-                adapter.resetData(new ArrayList<HomeFragmentRecyclerModel>(response.body()));
-                Utils.Toast(getContext(), "succesfully loaded");
+                if (response.isSuccessful()){
+                    adapter.resetData(new ArrayList<HomeFragmentRecyclerModel>(response.body()));
+                    Utils.Toast(getContext(), "succesfully loaded");
+                }
+
             }
 
             @Override

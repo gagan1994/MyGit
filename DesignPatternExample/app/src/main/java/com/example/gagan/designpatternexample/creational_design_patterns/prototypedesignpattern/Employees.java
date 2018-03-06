@@ -28,10 +28,8 @@ public class Employees implements Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        List<String> temp = new ArrayList<String>();
-        for (String s : this.getList()) {
-            temp.add(s);
-        }
+        List<String> temp = new ArrayList<String>(this.getList());
+
         return new Employees(temp);
     }
 
