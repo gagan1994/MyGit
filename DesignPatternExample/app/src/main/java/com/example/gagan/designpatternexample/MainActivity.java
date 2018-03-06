@@ -9,6 +9,7 @@ import com.example.gagan.designpatternexample.creational_design_patterns.Prototy
 import com.example.gagan.designpatternexample.creational_design_patterns.SingletonClassExample;
 import com.example.gagan.designpatternexample.creational_design_patterns.factorydesign.FactoryDesignPatternClass;
 import com.example.gagan.designpatternexample.helpers.BaseHelperClass;
+import com.example.gagan.designpatternexample.structural_design_pattern.AdapterPatternClass;
 
 import java.lang.reflect.Constructor;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        helperClass = new PrototypeDesignPattern();
+        helperClass = new AdapterPatternClass();
         helperClass.execute(this);
     }
 
