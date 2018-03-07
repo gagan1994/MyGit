@@ -1,0 +1,52 @@
+
+import java.io.*;
+
+import javax.xml.parsers.*;
+
+import org.w3c.dom.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+
+public class HelloWorld {
+public static void main(String[] args) {
+    System.out.println("Hello");
+    try{
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc =
+		builder.parse("D:/eclipseW/XmlParse/src/DateFile.xml");
+        
+        
+    	doc.getDocumentElement().normalize();
+    	System.out.println("Root element :"
+    	+ doc.getDocumentElement().getNodeName());
+    	NodeList nList = doc.getElementsByTagName("Item");
+    	
+    	for (int temp = 0; temp < nList.getLength(); temp++) {
+    		Node nNode = nList.item(temp);
+    		System.out.println("\nCurrent Element :" + nNode.getNodeName());
+    		Element eElement = (Element) nNode;
+    		System.out.println("Day: " + eElement.getElementsByTagName("Date").item(0).getTextContent());
+    		
+    	}   	
+
+    }
+    catch (Exception e){
+      e.getMessage();
+    }
+}
+public static boolean convertStringDatetimeToLong(String string_date) {
+    long milliseconds = 0;
+    SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    try {
+        Date d = f.parse(string_date);
+        milliseconds = d.getTime();
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
+}

@@ -41,10 +41,10 @@ public class NetworkModule {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
-                Request.Builder requestBuilder = original.newBuilder()
+                Request.Builder requestBuilder = original.newBuilder();
                         //  HEADER.put("connection","keep-alive");
-                        .addHeader("abc","avcas")
-                        .addHeader("connection", "keep-alive");
+                       // .addHeader("abc","avcas")
+                   //     .addHeader("connection", "keep-alive");
 
                 Request request = requestBuilder.build();
 

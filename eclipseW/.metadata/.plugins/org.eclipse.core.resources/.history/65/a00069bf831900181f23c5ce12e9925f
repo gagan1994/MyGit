@@ -1,0 +1,42 @@
+
+import java.io.*;
+
+import javax.xml.parsers.*;
+
+import org.w3c.dom.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+
+public class HelloWorld {
+public static void main(String[] args) {
+    System.out.println("Hello");
+    try{
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc =
+		builder.parse("D:/eclipseW/XmlParse/src/DateFile.xml");
+        
+        
+    	doc.getDocumentElement().normalize();
+    	System.out.println("Root element :"
+    	+ doc.getDocumentElement().getNodeName());
+    	NodeList nList = doc.getElementsByTagName("day");
+    	
+    	for (int temp = 0; temp < nList.getLength(); temp++) {
+
+    		Node nNode = nList.item(temp);
+
+    		System.out.println("\nCurrent Element :" + nNode.getNodeName());
+    		Element eElement = (Element) nNode;
+    		System.out.println("day : " + nNode.getUserData("day"));
+    		
+    	}   	
+
+    }
+    catch (Exception e){
+      e.getMessage();
+    }
+}
+}

@@ -69,7 +69,29 @@ public class HomeFragment extends BasePagerFragment {
         rv_view.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_view.setAdapter(adapter);
         callApi();
+        callDummy();
         return view;
+    }
+
+    private void callDummy() {
+        Call<List<UserClass>> call = apiInterface.getUsers("close");
+        call.enqueue(new Callback<List<UserClass>>() {
+            @Override
+            public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                String kee=call.request().header("connection");
+
+                 if (response.isSuccessful()){
+                    adapter.resetData(new ArrayList<HomeFragmentRecyclerModel>(response.body()));
+                    Utils.Toast(getContext(), "succesfully loaded");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<UserClass>> call, Throwable t) {
+                Utils.Toast(getContext(), "error");
+            }
+        });
     }
 
     private void callApi() {
@@ -77,6 +99,7 @@ public class HomeFragment extends BasePagerFragment {
         call.enqueue(new Callback<List<UserClass>>() {
             @Override
             public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                String kee=call.request().header("connection");
                 if (response.isSuccessful()){
                     adapter.resetData(new ArrayList<HomeFragmentRecyclerModel>(response.body()));
                     Utils.Toast(getContext(), "succesfully loaded");

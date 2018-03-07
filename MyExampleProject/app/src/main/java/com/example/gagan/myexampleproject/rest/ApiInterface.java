@@ -9,6 +9,8 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Header;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -17,6 +19,8 @@ import rx.Observable;
  */
 
 public interface ApiInterface {
+    @GET(Constant.USER_URL)
+    Call<List<UserClass>> getUsers(@Header("connection")String val);
     @GET(Constant.USER_URL)
     Call<List<UserClass>> getUsers();
 

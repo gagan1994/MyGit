@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,8 @@ public class OpenConnectionFragment extends BasePagerFragment {
         apiOpenConnectionInterface.getOpenConnection(Constant.getHEADER()).enqueue(new Callback<List<UserClass>>() {
             @Override
             public void onResponse(Call<List<UserClass>> call, Response<List<UserClass>> response) {
+                String kee=call.request().header("connection");
+                Log.w("asd",kee+" ");
                 Utils.   Toast(getActivity(), response.isSuccessful() ? "Succesfull" : "UnSuccesfull");
                 if (response.isSuccessful())
                     adapter.resetData(new ArrayList<>(response.body()));
