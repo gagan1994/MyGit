@@ -26,6 +26,11 @@ public class AdapterPatternClass extends BaseHelperClass {
 
     }
 
+    @Override
+    public String getUrl() {
+        return "https://cdn.journaldev.com/wp-content/uploads/2013/07/adapter-pattern-java-class-diagram.png";
+    }
+
     public static void display(String s) {
         Log.w("AdapterPatternClass", s);
     }

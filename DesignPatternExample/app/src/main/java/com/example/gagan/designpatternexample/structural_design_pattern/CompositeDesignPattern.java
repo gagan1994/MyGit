@@ -27,6 +27,11 @@ public class CompositeDesignPattern extends BaseHelperClass {
         drawing.draw("BLUE");
     }
 
+    @Override
+    public String getUrl() {
+        return "https://cdn.journaldev.com/wp-content/uploads/2013/07/Composite-Pattern-java.png";
+    }
+
     public static void display(String s) {
         Log.w("CompositePattern", s);
     }

@@ -22,4 +22,9 @@ public class DecoratorPattrenClass extends BaseHelperClass {
         Car sportsLuxuryCar = new SportsCar(new LuxuryCar(new BasicCar()));
         sportsLuxuryCar.assemble();
     }
+
+    @Override
+    public String getUrl() {
+        return "https://cdn.journaldev.com/wp-content/uploads/2013/07/decorator-pattern.png";
+    }
 }

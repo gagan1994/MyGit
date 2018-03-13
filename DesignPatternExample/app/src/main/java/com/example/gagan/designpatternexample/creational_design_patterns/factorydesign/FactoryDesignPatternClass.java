@@ -23,4 +23,9 @@ public class FactoryDesignPatternClass extends BaseHelperClass {
         Log.w("FactoryDesignPattern", "Server: " + server.toString());
 
     }
+
+    @Override
+    public String getUrl() {
+        return "https://cdn.journaldev.com/wp-content/uploads/2013/05/factory-pattern-java.png";
+    }
 }
