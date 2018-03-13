@@ -1,7 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
     android:orientation="vertical"
     tools:context="com.example.gagan.myexampleproject.fragments.RxJavaPaginatorFragment">
 
@@ -12,12 +15,8 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible" />
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
+
+
+

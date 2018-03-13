@@ -4,6 +4,7 @@ package com.example.gagan.myexampleproject.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -46,8 +47,9 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     public static final String TAG = "RxJavaPaginatorFragment";
     @BindView(R.id.recyclerView)
     RecyclerView rv_list;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.activity_main_swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     BaseFragmentComponent baseFragmentComponent;
     @Inject
     Picasso picasso;
@@ -81,6 +83,18 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
         baseFragmentComponent.injectRxJavaPagerFragment(this);
         layoutManager = new LinearLayoutManager(getContext());
         rv_list.setLayoutManager(layoutManager);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                callApi();
+            }
+        });
+        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         rv_list.setAdapter(adapter);
         addListners();
         callApi();
@@ -139,23 +153,23 @@ public class RxJavaPaginatorFragment extends BasePagerFragment {
     }
 
     private void loadMore() {
-        progressBar.setVisibility(View.VISIBLE);
 
         apiInterface.getUsersByObservable().
                 subscribeOn(Schedulers.io())
-                .delay(2, TimeUnit.SECONDS)
+                .delay(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<UserClass>>() {
                     @Override
                     public void onCompleted() {
                         loading = false;
-                        progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
+
                     }
 
                     @Override
