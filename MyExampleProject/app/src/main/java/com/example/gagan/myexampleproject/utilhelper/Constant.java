@@ -1,6 +1,9 @@
 package com.example.gagan.myexampleproject.utilhelper;
 
+import android.content.Intent;
+
 import com.example.gagan.myexampleproject.fragments.BasePagerFragment;
+import com.example.gagan.myexampleproject.fragments.NotificationFragment;
 import com.example.gagan.myexampleproject.fragments.OpenConnectionFragment;
 import com.example.gagan.myexampleproject.fragments.RxJavaPaginatorFragment;
 import com.example.gagan.myexampleproject.fragments.home.HomeFragment;
@@ -26,8 +29,12 @@ public class Constant {
     public static final String BASE_URL_OPEN_CONNECTIONs = "https://api.myjson.com/";
 
     public static final String BASE_URL_WEATHER = "http://api.openweathermap.org/data/2.5/";
+    public static final int REQ_PAUSE = 1;
+    public static final int REQ_PREV = 2;
+    public static final int REQ_NEXT = 3;
     public static String ApiId = "f724c38a7179c63c0e0a2268b403dce9";
     private static final Map<String, String> HEADER=new HashMap<>();
+    public static String NotificationString="NotificationString";
     ///?=London
 
     public static List<BasePagerFragment> getList() {
@@ -36,6 +43,7 @@ public class Constant {
         fragmentList.add(new HomeFragment());
         fragmentList.add(new RxJavaPaginatorFragment());
         fragmentList.add(new OpenConnectionFragment());
+        fragmentList.add(new NotificationFragment());
         fragmentList.add(new BasePagerFragment());
         return fragmentList;
     }
@@ -46,4 +54,21 @@ public class Constant {
         return HEADER;
     }
 
+    public static Intent getPlayPauseIntent() {
+        Intent intentPrev = new Intent("Notification_Event");
+        intentPrev.putExtra(Constant.NotificationString,1);
+        return intentPrev;
+    }
+
+
+    public static Intent getPrevIntent() {
+        Intent intentPrev = new Intent("Notification_Event");
+        intentPrev.putExtra(Constant.NotificationString,0);
+        return intentPrev;    }
+
+    public static Intent getNextIntent() {
+        Intent intentPrev = new Intent("Notification_Event");
+        intentPrev.putExtra(Constant.NotificationString,2);
+        return intentPrev;
+    }
 }
