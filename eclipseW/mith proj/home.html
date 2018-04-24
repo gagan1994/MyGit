@@ -1,0 +1,158 @@
+<html>
+<head>
+<title>CSS Template</title>
+<link rel="stylesheet" type="text/css" href="Mystyle.css"/>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+      $(document).ready(function(){
+	  $("#add").click(function(){
+        var f1,f2,f3,f4,f5,f6,f7;
+		f1=$("#n1").val();
+        f2=$("#n2").val();
+		f3=$("#n3").val();
+        f4=$("#n4").val();
+		f5=$("#n5").val();
+        f6=$("#n6").val();
+        f7=$("#n7").val();
+
+         $("#submit").click(function(){
+          $.post("http://localhost:3000",{n1:f1,n2:f2,n3:f3,n4:f4,n5:f5,n6:f6,n7:f7}, function(data){
+            if(data==='done')
+              {
+                alert("login success");
+              }
+          });
+        });
+      });
+	  });
+    </script>
+	
+	 
+	
+
+<script>
+function openDiv(evt, cityName){
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+
+
+</head>
+ <body>
+
+ 
+<div class="header">
+	<h1>NOKIA</h1>  
+</div>
+
+
+<div class="content">
+	<form name="PsdataConfigMobilityForm">
+		<div class="btn-group" style="width:100%">
+		<div class="tab">
+			<button class="tablinks" onclick="openDiv(event, 'PsdataGeneralConfigurationfileMobility')" style="width:33.3%">PsdataGeneralConfigurationfileMobility</button>
+			<button class="tablinks" onclick="openDiv(event, 'PsdataRegionMobility')"style="width:33.3%">PsdataRegionMobility</button>
+			<button class="tablinks" onclick="openDiv(event, 'PsdataDatesMobility')" style="width:33.3%">PsdataDatesMobility</button>
+		</div>
+		</div>
+
+<!---general--->
+<div id="PsdataGeneralConfigurationfileMobility" class="tabcontent">
+<fieldset>
+<legend>PsdataGenralconfigurationfileMobility:</legend>
+<input type="button" onclick="previewg()" class="button button4"  value="Preview" style="display: block; margin: 0px;  width: 100px; height: 32px; padding: 0px; float: right;" />
+	<table cellspacing="30" align="left">
+		<tr>	
+			<th><label class="labelClass">Subscribers</label><input type = "number" min="1" step="1"  value = "" id="n1" style="width:100px"/></th>
+			<th><label class="labelClass">cells</label><input type = "number"   min="1" step="1" value = "" id= "n2" style="width:100px"/></th>
+			<th><label class="labelClass">CEMOD</label><input type = "text"  value="" min="1" step="1"  id= "n3" required pattern="" style="width:100px"/></th>	
+					
+		</tr>
+	</table>
+</fieldset>
+</div>
+<!---general--->
+
+
+
+<!---region--->
+<div id="PsdataRegionMobility" class="tabcontent">
+<fieldset style="width:1300px; height:600px;">
+<legend>PsdataRegionMobility:</legend>
+<input type="button" onclick="previewr()" class="button button4"  value="Preview" style="display: block; margin: 0px;  width: 100px; height: 32px; padding: 0px; float: right;" />
+	<table cellspacing="30" align="left">
+		<tr>	
+			<th><label>Region:<input type="text" id="n4" list="regionname" style="width:100px"/>
+			<datalist id="regionname">
+			<label> 
+			<select name="regionname">
+			<option value="----">
+			<option value="Banglore">
+			<option value="Shimoga">
+			<option value="Mysore">
+			</select>
+			</label>
+			</datalist>
+			</label>
+			</th>
+			 <th><label>subscribersInPercentage&nbsp;</label><input type = "number" id="n5"  value = "" min="1" step="1" id= "per" style="width:100px"/></th>
+		 </tr>
+		<tr>
+			<th><label>Timezone: <input type="text"  id="n6" list="timezone" style="width:100px"/>
+				<datalist id="timezone">
+				<label> :
+				<select name="timezone">
+				<option value="---">
+				<option value="tz1">
+				<option value="cn">
+				<option value="tz2">
+				</select>
+				</label>
+				</datalist>
+				</label>
+			</th>
+		<th><input type="button" id="add" value="Add"/></th>
+		</tr>
+        </table>
+		
+</fieldset>
+</div>
+<!---region--->
+<!---dates--->
+<div id="PsdataDatesMobility" class="tabcontent">
+<fieldset style="width:1500px; height:800px">
+<legend>PsdataDatesMobility:</legend>
+<input type="button" onclick="previewd()" class="button button4"  value="Preview" style="display: block; margin: 0px;  width: 100px; height: 32px; padding: 0px; float: right;" />
+</br></br>
+	<table cellspacing="30" align="left">
+	<tr>
+		<th><label class="labelClass" style="padding-left:50px;" >HOURS:</label></th>
+		<td><label class="labelClass">DAY</label><input type="text"  id="n7" required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$" placeholder="yyyy-mm-dd HH:MM:SS" style="width:160px"/></td>
+		<table>
+		<tr>
+		
+		<th><input type="button" id="add" value="Add"/></th>
+		<th><input type="button" id="submit"  value="Submit"></th></tr>
+		</table>
+	</tr>
+</table>
+
+
+</fieldset>
+</div>
+
+</form>
+</div>
+</body>
+</html>

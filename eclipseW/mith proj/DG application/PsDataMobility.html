@@ -1,0 +1,188 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="Mystyle.css"/>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+<script src="storingMultiplevalues.js"></script>
+<script src="divTab.js"></script>
+<script src="enableCheckbox.js"></script>
+<script src="resetFields.js"></script>
+<script>	
+</script>
+</head>
+<body>
+
+<div class="header">
+	<h1>NOKIA</h1>  
+</div>
+
+<div class="content">
+	<form >
+		<div class="btn-group" style="width:100%">
+		<div class="tab">
+			<button class="tablinks" onclick="openDiv(event, 'PsdataGeneralConfigurationfileMobility')" style="width:33.3%">PsdataGeneralConfigurationfileMobility</button>
+			<button class="tablinks" onclick="openDiv(event, 'PsdataRegionMobility')" style="width:33.3%">PsdataRegionMobility</button>
+			<button class="tablinks" onclick="openDiv(event, 'PsdataDatesMobility')" style="width:33.3%">PsdataDatesMobility</button>
+		</div>
+		</div>
+<!---general--->
+<div id="PsdataGeneralConfigurationfileMobility" class="tabcontent">
+<fieldset style="width:1350px; height:400px;">
+<legend>PsdataGenralconfigurationfileMobility:</legend>
+		<table cellspacing="30" align="left">
+		<tr>	
+			<th><label class="labelClass">Subscribers</label>
+			<input type = "number" min="1" step="1"   id="Subscribersid" /></th>
+			<th><label class="labelClass">NoOfCells</label>
+			<input type = "number"   min="1" step="1"  id= "NoOfCellsid" /></th>
+			<th><label class="labelClass">CEMOD</label>
+			<input type = "text"  min="1" step="1"  id= "CEMODid" /></th>			
+			<th><label class="labelClass">NoOfURL</label>
+			<input type = "number" min="1" step="1"   id="NoOfURLid" /></th>
+			<th><label class="labelClass">Cells</label>
+			<input type = "number"   min="1" step="1" id= "Cellsid" /></th>
+		</tr>
+		
+		<tr>
+		<th><label>Phoneused</label>
+		<input type="number" min="1" step="1" id="phoneusedid" style="width:100px"/></th>
+		<th><label>Segmentused</label>
+		<input type="number" min="1" step="1"  id="segmentusedid" style="width:100px"/></th>
+		<th><label>ProtocolIDs</label>
+		<input type="number" min="1" step="1"  id="ProtocolIDsid" style="width:100px"/></th>
+		<th><label>Categories</label>
+		<input type="number" min="1" step="1"  id="Categoriesid" style="width:100px"/></th>
+		<th><label>NodeIDs</label>
+		<input type="number" min="1" step="1"  id="NodeIDsid" style="width:100px"/></th>
+		</tr>
+		
+		<tr>
+		<th><label>FNGIDs</label>
+		<input type="number" min="1" step="1"  id="FNGIDsid" style="width:100px"/></th>
+		<th><label>DomainVisits</label>
+		<input type="number" min="1" step="1" id="DomainVisitsid" style="width:100px"/></th>
+		<th><label>Applications</label>
+		<input type="number" min="1" step="1"  id="Applicationsid" style="width:100px"/></th>
+		<th><label>ApplicationsUsed</label>
+		<input type="number" min="1" step="1"  id="ApplicationsUsedid" style="width:100px"/></th>
+		<th><label>EventsPerDay</label>
+		<input type="number" min="1" step="1"  id="EventsPerDayid" style="width:100px"/></th>
+		</tr>
+		</table>
+</fieldset>
+</div>
+<!---general--->
+
+<!---region--->
+<div id="PsdataRegionMobility" class="tabcontent">
+<fieldset style="width:1300px; height:600px;">
+<legend>PsdataRegionMobility:</legend>
+		<table cellspacing="30" align="left">
+		<tr>	
+			<th><label>Region:</label><input type="text" id="Regionid" list="Region"/>
+				<datalist id="Region">
+				<option value="Banglore"></option>
+				<option value="Karnataka"></option>
+				<option value="Mysore"></option>
+				</datalist>
+					
+			</th>
+			<th><label>subscribersInPercentage</label>
+			<input type = "number" id="subscribersInPercentageid"   min="1" step="1" /></th>
+		</tr>
+		<tr>
+			<th><label>Timezone</label><input type="text"  id="Timezoneid" list="timezone"/>
+				<datalist id="timezone">
+				<option value="tz1"></option>
+				<option value="cn"></option>
+				</datalist>
+				
+			</th>
+			<th><label >TechnologyDistribution</label></th>
+		</tr>
+		<tr>
+			<th>
+			<td><label style="padding-left:180px; ">2G</label>
+			<input type="checkbox" id="chkPassport" onclick="enableTwoG(this)" /><input style="padding-left:60px; " type="number"   min="1" step="1" id="2gid" disabled="disabled"/></td>
+			</th>
+		</tr>
+		<tr>
+			<th>
+			<td><label style="padding-left:180px; ">3G</label>
+			<input type="checkbox" id="chkPassport" onclick="enableThreeG(this)" /><input style="padding-left:60px; " type="number"   min="1" step="1" id="3gid" disabled="disabled"/></td>
+			</th>
+		</tr>
+		<tr>
+			<th>
+			<td><label style="padding-left:180px; ">4G</label>
+			<input  type="checkbox" id="chkPassport" onclick="enableFourG(this)" /><input style="padding-left:60px;" type="number"  min="1" step="1" id="4gid" disabled="disabled" /></td>
+			</th>
+		</tr>
+		<tr>
+		<th><input type="button" id="resetRegion" value="NEW"/></th>
+		<th><input type="button" id="add" value="Add"/></th>
+		</tr>
+        </table>
+</fieldset>
+</div>
+<!---region--->
+<!---dates--->
+<div id="PsdataDatesMobility" class="tabcontent">
+<fieldset style="width:1500px; height:800px">
+<legend>PsdataDatesMobility:</legend>
+
+	<table cellspacing="30" align="left">
+	<tr>
+		<th><label class="labelClass" style="padding-left:50px;" >HOURS</label></th>
+		<td><label class="labelClass">DAY</label></td>
+		<td><input type="text"  id="hdayid" required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$" placeholder="yyyy-mm-dd HH:MM:SS" style="width:160px"/></td>
+		<td><input type="button" id="add1" value="Add"/></td>
+		<td><input type="button" id="resetHours" value="New"/></td>
+		
+		<td><label>Values</label></td>
+		<td><input type="number" id="valid" min="1" step="1"  style="width:100px"/></td>
+		<td><input type="button" id="add2" value="Add"/></td>
+		<td><input type="button" id="resetValues" value="New"/></td>
+	</tr>
+	<tr>	
+		<th></th>
+	</tr>
+	<tr>
+		<th><label class="labelClass" style="padding-left:50px;">DAYS</label></th>
+		<td><label class="labelClass">DAY</label></td>
+		<td><input type="text" id="daysid" required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$" placeholder="yyyy-mm-dd HH:MM:SS" style="width:160px"/></td>
+		<td><input type="button" id="add3" value="Add"/></td>
+		<td><input type="button" id="resetDays" value="New"/></td>
+	</tr>
+	<tr>
+		<th></th>
+	</tr>
+	<tr>
+		<th><label class="labelClass" style="padding-left:50px;">Week</label></th>
+		<td><label class="labelClass">DAY</label></td>
+		<td><input type="text" id="weekid" required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$" placeholder="yyyy-mm-dd HH:MM:SS" style="width:160px"/></td>
+		<td><input type="button" id="add4" value="Add"/></td>
+		<td><input type="button" id="resetweek" value="New"/></td>
+	</tr>
+	<tr>
+		<th></th>
+	</tr>
+	<tr>
+		<th><label class="labelClass" style="padding-left:50px;">Month</label></th>
+		<td><label class="labelClass">DAY</label></td>
+		<td><input type="text" id="monthid"    required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$ ^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$" placeholder="yyyy-mm-dd HH:MM:SS" style="width:160px"/></td>
+		<td><input type="button" id="add5" value="Add"/></td>
+		<td><input type="button" id="resetmonth" value="New"/></td>
+	</tr>
+	<tr>
+	<th><input type="button" id="submit"  value="Generate" ></th>
+	</tr>
+	</table>
+</fieldset>
+</div>
+
+</form>
+</div>
+</body>
+</html>
