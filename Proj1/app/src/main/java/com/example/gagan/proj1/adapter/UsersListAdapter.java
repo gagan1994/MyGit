@@ -15,6 +15,7 @@ import com.example.gagan.proj1.R;
 import com.example.gagan.proj1.dbhelper.DbHelper;
 import com.example.gagan.proj1.dbhelper.valueeventlistner.UserValueEventListener;
 import com.example.gagan.proj1.interfaces.UpdateUserInterface;
+import com.example.gagan.proj1.interfaces.UsersViewHolder;
 import com.example.gagan.proj1.pojo.User;
 import com.example.gagan.proj1.pojo.User;
 import com.example.gagan.proj1.widgets.CircleTransform;
@@ -36,8 +37,8 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     private final List<User> mData;
     private final UpdateUserInterface listner;
 
-    public UsersListAdapter(List<User> mData, UpdateUserInterface userInterface) {
-        this.mData = mData;
+    public UsersListAdapter(UpdateUserInterface userInterface) {
+        this.mData = new ArrayList<>();
         this.listner = userInterface;
     }
 
@@ -57,6 +58,12 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void update(List<User> users) {
+        mData.clear();
+        mData.addAll(users);
+        notifyItemRangeChanged(0, mData.size());
     }
 
     public class UsersListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

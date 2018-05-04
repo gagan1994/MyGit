@@ -5,12 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.gagan.proj1.R;
+import com.example.gagan.proj1.dbhelper.DbHelper;
 import com.example.gagan.proj1.interfaces.UpdateUserInterface;
 import com.example.gagan.proj1.pojo.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 
 /**
@@ -19,10 +24,8 @@ import com.google.firebase.database.DatabaseError;
 
 public class FirebaseUserListAdapter extends FirebaseRecyclerAdapter<User, UsersListViewHolder> {
 
-    private UpdateUserInterface listener;
-    public FirebaseUserListAdapter(@NonNull FirebaseRecyclerOptions<User> options,UpdateUserInterface listener) {
+    public FirebaseUserListAdapter(@NonNull FirebaseRecyclerOptions<User> options) {
         super(options);
-        this.listener=listener;
     }
 
     @Override
@@ -32,8 +35,14 @@ public class FirebaseUserListAdapter extends FirebaseRecyclerAdapter<User, Users
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UsersListViewHolder holder, int position, @NonNull User model) {
-        holder.bindUser(model,listener);
+    protected void onBindViewHolder(@NonNull UsersListViewHolder holder, final int position, @NonNull User model) {
+        holder.bindUser(model);
+        holder.setIsRecyclable(false);
+        holder.itemView.setOnClickListener(v -> {
+            Task<Void> task = DbHelper.getDbHepler().addOrRemoveUserToCurrentUserList(holder.getUser());
+            task.addOnSuccessListener(aVoid -> notifyDataSetChanged());
+            task.addOnFailureListener(e -> Toast.makeText(v.getContext(), "can't add some error", Toast.LENGTH_SHORT).show());
+        });
     }
 
     @NonNull

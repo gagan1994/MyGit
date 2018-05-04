@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "403417836008",
+    "firebase_url": "https://onlcine-cloth.firebaseio.com",
+    "project_id": "onlcine-cloth",
+    "storage_bucket": "onlcine-cloth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403417836008:android:2bf9c36fbb0dcf3a",
+        "android_client_info": {
+          "package_name": "com.online.cloth.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403417836008-ott5o6jhe0cf95r3istd3k6ksffcpa0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.online.cloth.app",
+            "certificate_hash": "b8bccf7c4e00927fe056ee9e1d6ae536816adc0a"
+          }
+        },
+        {
+          "client_id": "403417836008-clhpgc8fk69nsjao44pg9e387hge4jhk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAmNOaSEZ1xMY15OEbbO5gEc-Nae6Nt-Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403417836008-clhpgc8fk69nsjao44pg9e387hge4jhk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

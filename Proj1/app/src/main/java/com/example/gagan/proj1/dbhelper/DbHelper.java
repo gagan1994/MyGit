@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.math.BigInteger;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Gagan on 4/18/2018.
@@ -46,8 +46,20 @@ public class DbHelper {
 
 
     public void logInUser(GoogleSignInAccount account, Context context) {
-        user = new User(account);
-        checkAndAddUser(user, context);
+        getUsersRef().child(account.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                user.init(account);
+                checkAndAddUser(user, context);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void checkAndAddUser(final User user, final Context context) {
@@ -57,7 +69,6 @@ public class DbHelper {
             @Override
             public void onSuccess(Void aVoid) {
                 onlineStatusChanged(context);
-
                 Toast.makeText(context, "Logged in successfull", Toast.LENGTH_SHORT).show();
             }
         });
@@ -125,6 +136,7 @@ public class DbHelper {
         current_user.addValueEventListener(userValueEventListener);
     }
 
+
     public DatabaseReference getDatabaseRef() {
         return dataBaseRef;
     }
@@ -135,13 +147,10 @@ public class DbHelper {
         userOnlineRef.onDisconnect().setValue(false);
     }
 
-    private DatabaseReference getCurrentUserRef() {
+    public DatabaseReference getCurrentUserRef() {
         return current_user;
     }
 
-    public DatabaseReference getOnlineUsersRef() {
-        return getDatabaseRef().child(Constant.ONLINE_FIELD);
-    }
 
     public boolean setCurrentUser(User user) {
         if (isSameUser(user, this.user)) {
@@ -200,15 +209,19 @@ public class DbHelper {
         return getDatabaseRef().child(Constant.REGISTERED_USER).child(user.getId());
     }
 
-    public void addOrRemoveUserToCurrentUserList(User userId) {
-        for (int i = 0; i < user.getRegisteredUserId().size(); i++) {
-            if (user.getRegisteredUserId().get(i).equals(userId.getId())) {
+    public Task<Void> addOrRemoveUserToCurrentUserList(User userId) {
+        if (user.getRegisteredUserId() == null || user.getRegisteredUserId().size() == 0) {
+            user.setRegisteredUserId(new ArrayList<>());
+            user.getRegisteredUserId().add(userId.getId());
+        } else {
+
+            if (user.getRegisteredUserId().contains(userId.getId())) {
                 user.getRegisteredUserId().remove(userId.getId());
             } else {
                 user.getRegisteredUserId().add(userId.getId());
             }
         }
-        updateUser(user);
+        return updateUser(user);
     }
 
 

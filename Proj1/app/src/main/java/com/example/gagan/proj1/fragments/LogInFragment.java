@@ -14,19 +14,17 @@ import android.view.ViewGroup;
 
 import com.example.gagan.proj1.MainActivity;
 import com.example.gagan.proj1.R;
-import com.example.gagan.proj1.adapter.FirebaseUserListAdapter;
-import com.example.gagan.proj1.adapter.UsersListViewHolder;
+import com.example.gagan.proj1.adapter.UsersListAdapter;
 import com.example.gagan.proj1.dbhelper.DbHelper;
+import com.example.gagan.proj1.dbhelper.valueeventlistner.UserValueEventListener;
 import com.example.gagan.proj1.interfaces.UpdateUserInterface;
 import com.example.gagan.proj1.pojo.User;
 import com.example.gagan.proj1.widgets.SeparatorDecoration;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.ObservableSnapshotArray;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,9 +38,8 @@ public class LogInFragment extends BaseFragment implements UpdateUserInterface {
     public final static int Id = 1;
     @BindView(R.id.rv_list)
     RecyclerView mRecyclerView;
-
-    private FirebaseRecyclerAdapter<User, UsersListViewHolder> mFirebaseAdapter;
-
+    private List<User> users = new ArrayList<>();
+    private UsersListAdapter mAdapter;
 
     public LogInFragment() {
     }
@@ -57,29 +54,35 @@ public class LogInFragment extends BaseFragment implements UpdateUserInterface {
     }
 
     private void init() {
-        final DatabaseReference usersRef = DbHelper.getDbHepler().getUsersRegForThisRef();
-        Query query = usersRef
-                .limitToLast(50);
-        FirebaseRecyclerOptions<User> options =
-                new FirebaseRecyclerOptions.Builder<User>()
-                        .setQuery(query, User.class)
-                        .build();
-        mFirebaseAdapter = new FirebaseUserListAdapter(options, this);
         mRecyclerView.addItemDecoration(new SeparatorDecoration(getActivity(), Color.TRANSPARENT, 5));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-        mFirebaseAdapter.startListening();
-        if (mFirebaseAdapter.getItemCount() == 0) {
+        mAdapter = new UsersListAdapter( this);
+        mRecyclerView.setAdapter(mAdapter);
+        DbHelper.getDbHepler().getCurrentUserRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                users.clear();
+                User usersRef = dataSnapshot.getValue(User.class);
 
-        } else {
+                if (usersRef.getRegisteredUserId() != null)
+                    for (String item : usersRef.getRegisteredUserId()) {
+                        DbHelper.getDbHepler().getUsersRef().child(item).
+                                addListenerForSingleValueEvent(new UserValueEventListener() {
+                                    @Override
+                                    public void updatedUser(User user) {
+                                        users.add(user);
+                                        mAdapter.update(users);
+                                    }
+                                });
+                    }
+            }
 
-        }
-    }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mFirebaseAdapter.stopListening();
+            }
+        });
+
     }
 
     @Override
@@ -88,7 +91,7 @@ public class LogInFragment extends BaseFragment implements UpdateUserInterface {
     }
 
     @Override
-    public void OnClickUser(User user,View view) {
+    public void OnClickUser(User user, View view) {
         ((MainActivity) getActivity()).openChatt(user);
     }
 }

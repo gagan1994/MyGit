@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     ImageView online_status;
     @BindView(R.id.btnAddUsers)
     View btnAddUsers;
-    @BindView(R.id.searchButton)
-    View searchButton;
+
 
     @BindView(R.id.tv_info)
     TextView tv_info;
@@ -157,14 +156,9 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     }
 
-    @OnClick(R.id.searchButton)
-    public void onClickSearch() {
-        viewPager.setCurrentItem(adapter.getAddUserId());
-    }
-
     @OnClick(R.id.btnAddUsers)
     public void onAddClick() {
-        searchButton.callOnClick();
+        viewPager.setCurrentItem(adapter.getAddUserId());
     }
 
     @Override

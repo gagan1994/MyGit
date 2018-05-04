@@ -1,8 +1,12 @@
 package com.example.gagan.myexampleproject;
 
+import android.Manifest;
 import android.app.ActionBar;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,13 +18,17 @@ import com.example.gagan.myexampleproject.uiadapters.TabAdapter;
 import com.example.gagan.myexampleproject.utilhelper.Constant;
 import com.example.gagan.myexampleproject.utilhelper.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.icu.text.DateTimePatternGenerator.PatternInfo.OK;
+
 public class MainActivity extends AppCompatActivity implements android.support.v7.app.ActionBar.TabListener, ViewPager.OnPageChangeListener {
+    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 120;
     @BindView(R.id.scrollView)
     ViewPager viewPager;
     private Unbinder unbinder;
@@ -33,7 +41,30 @@ public class MainActivity extends AppCompatActivity implements android.support.v
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
-        initAll();
+        checkAndRequestPermissions();
+    }
+
+    private boolean checkAndRequestPermissions() {
+        int sms = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS);
+        int loc = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int loc2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (sms != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_SMS);
+        }
+        if (loc != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (loc2 != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new
+                    String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
     }
 
     private void initAll() {
@@ -78,5 +109,16 @@ public class MainActivity extends AppCompatActivity implements android.support.v
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS:
+                if (resultCode == OK)
+                    initAll();
+                break;
+        }
     }
 }

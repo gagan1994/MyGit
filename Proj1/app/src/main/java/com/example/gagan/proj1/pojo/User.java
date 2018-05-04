@@ -1,5 +1,7 @@
 package com.example.gagan.proj1.pojo;
 
+import android.net.Uri;
+
 import com.example.gagan.proj1.utils.Constant;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
@@ -111,5 +113,15 @@ public class User {
 
     public void setRegisteredUserId(List<String> registeredUserId) {
         this.registeredUserId = registeredUserId;
+    }
+
+    public void init(GoogleSignInAccount account) {
+        email = account.getEmail();
+        name = account.getDisplayName();
+        nickName = account.getGivenName();
+        imageUrl = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : Constant.EMPTY_PROFILE_PIC;
+        id = account.getId();
+        onlineStatus = true;
+        typing = false;
     }
 }

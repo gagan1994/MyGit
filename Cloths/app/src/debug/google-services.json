@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "689451153073",
+    "firebase_url": "https://oncline-cloth-2-debug.firebaseio.com",
+    "project_id": "oncline-cloth-2-debug",
+    "storage_bucket": "oncline-cloth-2-debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689451153073:android:c0e9b607f3f6e6bb",
+        "android_client_info": {
+          "package_name": "com.online.cloth.app.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689451153073-m51pofojkn6pjggpnok409708moe63up.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.online.cloth.app.debug",
+            "certificate_hash": "b8bccf7c4e00927fe056ee9e1d6ae536816adc0a"
+          }
+        },
+        {
+          "client_id": "689451153073-sd2pjnloske5lns221j0pkubl5h1o15l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBhl7Ar3ZA5VBfN3KW6-Mu47WWFvkHQM0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689451153073-sd2pjnloske5lns221j0pkubl5h1o15l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
